@@ -1,93 +1,41 @@
-document.addEventListener("DOMContentLoaded", () => {
+const messages = [
+"🔥 شخص من الرباط طلب اشتراك قبل دقيقة",
+"🔥 شخص من الدار البيضاء اشترك الآن",
+"🔥 تم تفعيل اشتراك جديد",
+"🔥 زبون من مراكش استفاد من العرض",
+"🔥 آخر اشتراك تم قبل لحظات",
+"🔥 العرض مازال متوفر"
+];
 
-document.body.style.opacity="0";
+function showNotification(){
+
+const old=document.querySelector(".notify");
+
+if(old){
+old.remove();
+}
+
+const box=document.createElement("div");
+
+box.className="notify";
+
+box.innerHTML=messages[Math.floor(Math.random()*messages.length)];
+
+document.body.appendChild(box);
 
 setTimeout(()=>{
-document.body.style.transition="opacity .7s ease";
-document.body.style.opacity="1";
+box.classList.add("show");
 },100);
 
-const cards=document.querySelectorAll(".card");
+setTimeout(()=>{
+box.classList.remove("show");
+setTimeout(()=>{
+box.remove();
+},500);
+},4000);
 
-const observer=new IntersectionObserver((entries)=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.style.opacity="1";
-entry.target.style.transform="translateY(0)";
-}
-});
-});
-
-cards.forEach(card=>{
-card.style.opacity="0";
-card.style.transform="translateY(40px)";
-card.style.transition=".6s";
-observer.observe(card);
-});
-
-});
-.free-trial{
-background:#111;
-padding:25px;
-margin:25px;
-border-radius:20px;
-border:2px solid #d4af37;
-text-align:center;
 }
 
-.free-trial h2{
-color:#d4af37;
-font-size:30px;
-margin-bottom:15px;
-}
+setInterval(showNotification,8000);
 
-.trial-text{
-font-size:18px;
-color:#fff;
-line-height:1.8;
-}
-
-.trial-box{
-display:flex;
-flex-direction:column;
-gap:10px;
-margin:20px 0;
-font-size:18px;
-color:#fff;
-}
-
-.trial-btn{
-display:inline-block;
-background:#d4af37;
-color:#000;
-padding:15px 30px;
-border-radius:12px;
-font-size:20px;
-font-weight:bold;
-text-decoration:none;
-}
-
-.features{
-padding:25px;
-}
-
-.features h2{
-color:#d4af37;
-text-align:center;
-margin-bottom:20px;
-}
-
-.features ul{
-list-style:none;
-padding:0;
-}
-
-.features li{
-background:#111;
-margin:10px 0;
-padding:15px;
-border-radius:10px;
-color:#fff;
-border-right:4px solid #d4af37;
-font-size:18px;
-}
+showNotification();
