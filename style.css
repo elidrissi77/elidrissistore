@@ -175,3 +175,26 @@ text-align:center;
 margin-top:40px;
 color:#999;
 }
+
+.notify{
+position:fixed;
+bottom:20px;
+left:20px;
+background:#111;
+color:#fff;
+padding:15px 20px;
+border-right:5px solid #25D366;
+border-radius:12px;
+box-shadow:0 0 15px rgba(0,0,0,.4);
+opacity:0;
+transform:translateY(30px);
+transition:.4s;
+z-index:9999;
+max-width:300px;
+font-size:16px;
+}
+
+.notify.show{
+opacity:1;
+transform:translateY(0);
+}
